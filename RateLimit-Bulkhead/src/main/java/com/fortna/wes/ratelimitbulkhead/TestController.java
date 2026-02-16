@@ -9,13 +9,28 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
     @Autowired
-    private RateLimitService rateLimitService;
+    private BussinessService bussinessService;
 
-    @GetMapping("/test")
-    public String test(HttpServletRequest request) {
+    @GetMapping("/test-rate-limit")
+    public String testRateLimit(HttpServletRequest request) {
         String ip = request.getRemoteAddr();
 
-        rateLimitService.executeWithIPLimit(ip, () -> System.out.println("Thực thi logic quan trọng cho IP: " + ip));
+        bussinessService.executeWithIPLimit(ip, () -> System.out.println("Thực thi logic quan trọng cho IP: " + ip));
+
+        return "Success";
+    }
+
+    @GetMapping("/test-bulkhead")
+    public String testBulkhead(HttpServletRequest request) {
+
+        bussinessService.executeWithBulkhead(Thread.currentThread().getName(), () -> {
+            try {
+                Thread.sleep(5000L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Thực thi logic, thread: " + Thread.currentThread().getName());
+        });
 
         return "Success";
     }

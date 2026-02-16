@@ -13,5 +13,5 @@ resilience4j:
   bulkhead:
     configs:
       backendApi:
-        maxConcurrentCalls: 1         # Chỉ cho phép tối đa n request xử lý cùng lúc
-        maxWaitDuration: 1000ms      # Đợi tối đa 10ms nếu bulkhead đầy
+        maxConcurrentCalls: 1        # Tối đa n request chạy song song cho mỗi IP
+        maxWaitDuration: 0ns         # Nếu đầy, báo lỗi ngay (không đợi)
