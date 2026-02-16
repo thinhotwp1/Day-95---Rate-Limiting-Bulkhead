@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: RateLimit-Bulkhead
+
+resilience4j:
+  ratelimiter:
+    configs:
+      backendApi:
+        limitForPeriod: 1            # n request
+        limitRefreshPeriod: 5s     # mỗi n giây
+        timeoutDuration: 0ns       # Nếu hết lượt, fail ngay lập tức (không đợi)
+
+  bulkhead:
+    configs:
+      backendApi:
+        maxConcurrentCalls: 1         # Chỉ cho phép tối đa n request xử lý cùng lúc
+        maxWaitDuration: 1000ms      # Đợi tối đa 10ms nếu bulkhead đầy
