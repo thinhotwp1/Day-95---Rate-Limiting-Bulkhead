@@ -8,12 +8,12 @@ import io.github.resilience4j.ratelimiter.RateLimiter;
 import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
 
 @Service
-public class BussinessService {
+public class BusinessService {
 
     private final RateLimiterRegistry rateLimiterRegistry;
     private final BulkheadRegistry bulkheadRegistry; // Thêm Registry này
 
-    public BussinessService(RateLimiterRegistry rateLimiterRegistry, BulkheadRegistry bulkheadRegistry) {
+    public BusinessService(RateLimiterRegistry rateLimiterRegistry, BulkheadRegistry bulkheadRegistry) {
         this.rateLimiterRegistry = rateLimiterRegistry;
         this.bulkheadRegistry = bulkheadRegistry;
     }

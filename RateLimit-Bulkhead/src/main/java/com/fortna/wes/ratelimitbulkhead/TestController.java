@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
     @Autowired
-    private BussinessService bussinessService;
+    private BusinessService bussinessService;
 
     @GetMapping("/test-rate-limit")
     public String testRateLimit(HttpServletRequest request) {
